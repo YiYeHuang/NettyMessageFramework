@@ -16,6 +16,19 @@ public class MessageServer {
 	ServerBootstrap boot;
 	ChannelFuture cFuture;
 
+	private static MessageServer instance;
+
+	private MessageServer() {
+	}
+
+	public static synchronized MessageServer getInstance() {
+		if (null == instance) {
+			instance = new MessageServer();
+		}
+
+		return instance;
+	}
+
 	public void start() throws InterruptedException {
 		main = new NioEventLoopGroup();
 		worker = new NioEventLoopGroup();
