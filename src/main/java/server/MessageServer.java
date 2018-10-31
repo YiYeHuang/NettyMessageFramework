@@ -40,7 +40,10 @@ public class MessageServer {
 					.childHandler(new ChannelInitializer<SocketChannel>() {
 						@Override
 						public void initChannel(SocketChannel ch) {
-							ch.pipeline().addLast(new MessageHandler());
+							ch.pipeline()
+									.addLast(new ServerDecoder())
+									.addLast(new ServerEncoder())
+									.addLast(new ServerMessageHandler());
 						}
 					})
 					.option(ChannelOption.SO_BACKLOG, 128)
