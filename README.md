@@ -1,9 +1,9 @@
 # NettyMeesageFramework - PostgresSQL example
 
 ## Intention
-A while ago, I was doing a JDBC connector project that can connec to PostgresSQL. This is a challenge task as there are 
-no third party SDK for connecting to PostgresSQL DB server. So the implementation has to begin with raw wire protocol and
-nasty buffer reading. I very quickly running into TCP sticky packet issue. At that time, I was using raw Java Nio framework
+A while ago, I was doing a JDBC connector project that can connect to PostgresSQL DB. This is a challenge task as there were just
+no third party SDK for connecting to PostgresSQL DB server. So the implementation had to begin with raw wire protocol and
+nasty buffer reading. I was very quickly running into TCP sticky packet issue. At that time, Java Nio framework was used
 for this project. This repo is a simulation of PostgresSQL server/client with basic: Auth, Query and Disconnect request/response.
 But at this time, I refresh the implementation with Netty.
 
