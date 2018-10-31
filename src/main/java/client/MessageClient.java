@@ -1,5 +1,7 @@
 package client;
 
+import client.codec.ClientDecoder;
+import client.codec.ClientEncoder;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -8,7 +10,7 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import protocol.Message;
+import clientprotocol.Message;
 
 import java.io.UnsupportedEncodingException;
 
@@ -50,12 +52,12 @@ public class MessageClient {
     public void close() throws InterruptedException {
         ioc.channel().closeFuture().sync();
         clientGroup.shutdownGracefully();
+        System.out.println("Shutting down client");
     }
 
-    public void sendRequest(int id) throws InterruptedException, UnsupportedEncodingException {
+    public void sendRequest(Message outbound) throws UnsupportedEncodingException {
         getChannelFuture();
-        Message ret = new Message(id, "task".getBytes("UTF-8").length,"task");
-        ioc.channel().writeAndFlush(ret);
+        ioc.channel().writeAndFlush(outbound);
     }
 
     private void init() {
